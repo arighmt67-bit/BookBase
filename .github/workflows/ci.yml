@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies (none)
+        run: echo "No dependencies to install"
+
+      - name: Build with xcodebuild
+        run: |
+          set -e
+          xcodebuild -project BookBase.xcodeproj -scheme BookBase -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15' clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
